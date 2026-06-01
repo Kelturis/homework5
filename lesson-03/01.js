@@ -1,3 +1,7 @@
-// Напишите функцию calculateAverage, которая принимает 2 числа и возвращает их среднее арифметическое
+// Напишите ФУНКЦИЮ calculateAverage, которая ПРИНИМАЕТ 2 ЧИСЛА(ПАРАМЕТРА) и ВОЗВРАЩАЕТ(return) их среднее арифметическое(/2)
 
-function calculateAverage() {}
+function calculateAverage(a, b) {
+    return (a + b) / 2
+}
+
+console.log(calculateAverage(3, 7)); // 5
