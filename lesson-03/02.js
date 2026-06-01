@@ -6,6 +6,8 @@ function isEven(a) {
         return true;
     } else if (a % 2 === 1) { // НЕЧЁТНЫЙ Остаток от Целочисленного Деления
         return false;
+    } else {
+        return false
     }
 }
 
@@ -13,3 +15,4 @@ console.log(isEven(24));
 console.log(isEven(42));
 console.log(isEven(55));
 console.log(isEven(73));
+console.log(isEven(-1));

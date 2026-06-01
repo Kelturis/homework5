@@ -7,9 +7,12 @@ function findLargest(a, b, c) {
         return b
     } else if (c > a && c > b) {
         return c
+    } else {
+        return a || b || c
     }
 }
 
 console.log(findLargest(55, 5, 52));
 console.log(findLargest(0, 44, 23));
 console.log(findLargest(-50, 50, 77));
+console.log(findLargest(22, 22, 22));
