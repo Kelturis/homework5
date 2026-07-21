@@ -1,14 +1,24 @@
 /*
- * Напишите функцию isNumeric, которая принимает строку и проверяет, представляет ли эта строка корректное числовое значение.
- * Если строка является числом, функция должна возвращать true, в противном случае - false.
+ * Напишите Функцию(isNumeric), которая принимает Строку(Аргумент) и ПРОВЕРЯЕТ, представляет ли эта Строка(Аргумент)
+  корректное Числовое значение.
+ * Если(if) Строка(Аргумент) является(===) Числом, Функцию(isNumeric) должна ВОЗВРАЩАТЬ(return) true, в противном случае - false.
  */
 
+// function isNumeric(str) {
+//   let number = +str;
+//   if (number) {
+//     return true
+//   } else {
+//     return false
+//   }
+// }
+
 function isNumeric(str) {
-  // your code
+  return +str ? true : false
 }
 
-// console.log(isNumeric("123")) // Ожидаемый результат: true
-// console.log(isNumeric("12.3")) // Ожидаемый результат: true
-// console.log(isNumeric("123abc")) // Ожидаемый результат: false
-// console.log(isNumeric("abc")) // Ожидаемый результат: false
-// console.log(isNumeric(" ")) // Ожидаемый результат: false
+console.log(isNumeric("123")) // Ожидаемый результат: true
+console.log(isNumeric("12.3")) // Ожидаемый результат: true
+console.log(isNumeric("123abc")) // Ожидаемый результат: false
+console.log(isNumeric("abc")) // Ожидаемый результат: false
+console.log(isNumeric(" ")) // Ожидаемый результат: false
