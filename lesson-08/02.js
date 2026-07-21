@@ -13,8 +13,12 @@
 //   }
 // }
 
+// function isNumeric(str) {
+//   return +str ? true : false
+// }
+
 function isNumeric(str) {
-  return +str ? true : false
+  return !isNaN(str) && str.trim() !== '';
 }
 
 console.log(isNumeric("123")) // Ожидаемый результат: true
