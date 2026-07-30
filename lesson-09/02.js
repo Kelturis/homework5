@@ -23,21 +23,73 @@
 
 Подсказки:
 - 🧙‍♂️ Для выполнения этого задания нужно познакомиться с браузерными функциями setInterval (https://doka.guide/js/setinterval/) и clearInterval(https://doka.guide/js/clearinterval/). Они очень похоже на setTimeout и clearTimeout.
- */
+*/
 
 const startButton = document.getElementById('start')
 const cancelButton = document.getElementById('cancel')
 const countdownDisplay = document.getElementById('countdown')
 
+// Переменная, которая хранит состояние таймера (запущен или нет)
 let isTimerStarted = false
+// Переменная для хранения идентификатора таймера, чтобы потом его можно было остановить
 let timerId
 
+// Обработчик события для кнопки "Старт"
 startButton.addEventListener('click', () => {
-  let counter = 3
+  // Проверяем, не запущен ли уже таймер
+  // Если запущен, то просто выходим из функции, чтобы не создать второй таймер
+  if (isTimerStarted) {
+    return // return досрочно завершает выполнение функции
+  }
 
-  // your code
+  // Начинаем обратный отсчет с 3
+  let counter = 3
+  // Устанавливаем флаг, что таймер запущен
+  isTimerStarted = true
+  // Сразу показываем цифру 3 на экране (без задержки)
+  countdownDisplay.textContent = counter
+
+  // На всякий случай очищаем предыдущий таймер, если он вдруг существует
+  // (это защита от ошибок, если вдруг таймер остался висеть)
+  if (timerId) {
+    clearInterval(timerId)
+  }
+
+  // Запускаем интервал - функция будет выполняться каждую секунду (1000 миллисекунд)
+  timerId = setInterval(() => {
+    // Уменьшаем счетчик на 1 каждую секунду
+    counter--
+
+    // Проверяем, достиг ли счетчик нуля
+    if (counter === 0) {
+      // Если достиг, то показываем эмодзи ракеты вместо цифры
+      countdownDisplay.textContent = '🚀'
+      // Останавливаем таймер, так как отсчет завершен
+      clearInterval(timerId)
+      // Обнуляем идентификатор таймера
+      timerId = null
+      // Сбрасываем флаг, что таймер запущен
+      isTimerStarted = false
+    } else {
+      // Если счетчик еще не ноль, обновляем отображение с текущим числом
+      countdownDisplay.textContent = counter
+    }
+  }, 1000) // 1000 миллисекунд = 1 секунда
 })
 
+// Обработчик события для кнопки "Отмена"
 cancelButton.addEventListener('click', () => {
-  // your code
+  // Проверяем, что таймер действительно запущен (isTimerStarted = true) 
+  // и что у нас есть его идентификатор (timerId не null)
+  if (isTimerStarted && timerId) {
+    // Останавливаем таймер
+    clearInterval(timerId)
+    // Обнуляем идентификатор
+    timerId = null
+    // Сбрасываем флаг запуска
+    isTimerStarted = false
+    // Показываем сообщение об отмене
+    countdownDisplay.textContent = 'Отменено'
+  }
+  // Если таймер не запущен, то кнопка "Отмена" ничего не делает
 })
