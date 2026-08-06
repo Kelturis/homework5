@@ -29,7 +29,7 @@ const model = {
     this.movies.push(newMovie)
     view.renderMovies(this.movies)
   },
-  // Метод для удаления фильма по id
+  // Метод для УДАЛЕНИЯ фильма по id
   deleteMovie(movieId) {                    // принимает id фильма
     // filter создает НОВЫЙ массив, где остаются только те фильмы,
     // у которых id НЕ РАВЕН movieId (который мы хотим удалить)
