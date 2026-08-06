@@ -111,7 +111,7 @@ const controller = {
   },
   // Метод для удаления фильма (связывает View и Model)
   deleteMovie(movieId) {                    // принимает id фильма
-    // 1. Передаем id в модель для удаления
+    // 1. Передаем id в модель для УДАЛЕНИЯ
     model.deleteMovie(movieId)
     // 2. Показываем сообщение об успешном удалении
     view.displayMessage('Фильм успешно удалён!')
