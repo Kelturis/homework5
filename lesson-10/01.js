@@ -1,10 +1,10 @@
 /*
-  Цель задания: Разработать функционал для удаления фильма из списка с использованием паттерна MVC. После удаления фильма, необходимо отобразить сообщение "Фильм успешно удалён!" в message-box
+  Цель задания: Разработать функционал для удаления фильма из списка с использованием паттерна MVC. 
+  После удаления фильма, необходимо отобразить сообщение "Фильм успешно удалён!" в message-box
 
   При возникновении сложностей можете ознакомиться с пошаговым планом реализации ниже, но лучше попробовать сначала самостоятельно 🧙‍♂️
 
 Пошаговый план реализации:
-
 1. Реализовать метод deleteMovie в объекте model:
   - метод должен принимать id фильма, который необходимо удалить
   - метод должен удалить фильм из массива movies
@@ -29,7 +29,14 @@ const model = {
     this.movies.push(newMovie)
     view.renderMovies(this.movies)
   },
-  // your code
+  // Метод для удаления фильма по id
+  deleteMovie(movieId) {                    // принимает id фильма
+    // filter создает НОВЫЙ массив, где остаются только те фильмы,
+    // у которых id НЕ РАВЕН movieId (который мы хотим удалить)
+    this.movies = this.movies.filter((movie) => movie.id !== movieId)
+    // Обновляем отображение списка на странице
+    view.renderMovies(this.movies)
+  }
 }
 
 const view = {
@@ -50,7 +57,19 @@ const view = {
       inputDescription.value = ''
     })
 
-    // your code
+    // НАВЕШИВАЕМ обработчик на СПИСОК (<ul class="list">)
+    const list = document.querySelector('.list')
+    
+    list.addEventListener('click', function (event) {
+      // ПРОВЕРЯЕМ: клик был по кнопке с классом 'delete-button'?
+      if (event.target.classList.contains('delete-button')) {
+        // Получаем id из РОДИТЕЛЬСКОГО элемента <li>
+        // parentElement - это <li>, у которого есть id фильма
+        const movieId = event.target.parentElement.id
+        // Передаем id в контроллер
+        controller.deleteMovie(movieId)
+      }
+    })
   },
   renderMovies(movies) {
     const list = document.querySelector('.list')
@@ -90,7 +109,13 @@ const controller = {
       view.displayMessage('Заполните все поля!', true)
     }
   },
-  // your code
+  // Метод для удаления фильма (связывает View и Model)
+  deleteMovie(movieId) {                    // принимает id фильма
+    // 1. Передаем id в модель для удаления
+    model.deleteMovie(movieId)
+    // 2. Показываем сообщение об успешном удалении
+    view.displayMessage('Фильм успешно удалён!')
+  }
 }
 
 function init() {
