@@ -103,10 +103,9 @@ const controller = {
     }
   },
   deleteMovie(movieId) {
-    // ВАЖНО: сначала удаляем, потом показываем сообщение
-    model.deleteMovie(movieId)
-    // Сообщение показываем после того, как модель обновила данные
-    view.displayMessage('Фильм успешно удалён!')
+    // Преобразуем movieId в число перед сравнением
+    this.movies = this.movies.filter((movie) => movie.id !== Number(movieId))
+    view.renderMovies(this.movies)
   }
 }
 
