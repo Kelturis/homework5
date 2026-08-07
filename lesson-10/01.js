@@ -109,7 +109,7 @@ const controller = {
       view.displayMessage('Заполните все поля!', true)
     }
   },
-  // Метод для удаления фильма (связывает View и Model)
+  // Метод для УДАЛЕНИЯ фильма (связывает View и Model)
   deleteMovie(movieId) {                    // принимает id фильма
     // 1. Передаем id в модель для УДАЛЕНИЯ
     model.deleteMovie(movieId)
