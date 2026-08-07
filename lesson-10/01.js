@@ -29,12 +29,10 @@ const model = {
     this.movies.push(newMovie)
     view.renderMovies(this.movies)
   },
-  // Метод для УДАЛЕНИЯ фильма по id
-  deleteMovie(movieId) {                    // принимает id фильма
-    // filter создает НОВЫЙ массив, где остаются только те фильмы,
-    // у которых id НЕ РАВЕН movieId (который мы хотим удалить)
+  deleteMovie(movieId) {
+    // Сначала создаем новый массив без удаляемого фильма
     this.movies = this.movies.filter((movie) => movie.id !== movieId)
-    // Обновляем отображение списка на странице
+    // Затем обновляем отображение
     view.renderMovies(this.movies)
   }
 }
@@ -57,16 +55,11 @@ const view = {
       inputDescription.value = ''
     })
 
-    // НАВЕШИВАЕМ обработчик на СПИСОК (<ul class="list">)
     const list = document.querySelector('.list')
     
     list.addEventListener('click', function (event) {
-      // ПРОВЕРЯЕМ: клик был по кнопке с классом 'delete-button'?
       if (event.target.classList.contains('delete-button')) {
-        // Получаем id из РОДИТЕЛЬСКОГО элемента <li>
-        // parentElement - это <li>, у которого есть id фильма
         const movieId = event.target.parentElement.id
-        // Передаем id в контроллер
         controller.deleteMovie(movieId)
       }
     })
@@ -109,11 +102,10 @@ const controller = {
       view.displayMessage('Заполните все поля!', true)
     }
   },
-  // Метод для УДАЛЕНИЯ фильма (связывает View и Model)
-  deleteMovie(movieId) {                    // принимает id фильма
-    // 1. Передаем id в модель для УДАЛЕНИЯ
+  deleteMovie(movieId) {
+    // ВАЖНО: сначала удаляем, потом показываем сообщение
     model.deleteMovie(movieId)
-    // 2. Показываем сообщение об успешном удалении
+    // Сообщение показываем после того, как модель обновила данные
     view.displayMessage('Фильм успешно удалён!')
   }
 }
