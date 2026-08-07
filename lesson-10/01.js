@@ -24,15 +24,13 @@
 const model = {
   movies: [],
   addMovie(title, description) {
-    const id = Math.random()
+    const id = Math.random().toString() // ИЗМЕНЕНО: преобразуем в строку
     const newMovie = { id, title, description }
     this.movies.push(newMovie)
     view.renderMovies(this.movies)
   },
   deleteMovie(movieId) {
-    // Сначала создаем новый массив без удаляемого фильма
     this.movies = this.movies.filter((movie) => movie.id !== movieId)
-    // Затем обновляем отображение
     view.renderMovies(this.movies)
   }
 }
@@ -103,9 +101,8 @@ const controller = {
     }
   },
   deleteMovie(movieId) {
-    // Преобразуем movieId в число перед сравнением
-    this.movies = this.movies.filter((movie) => movie.id !== Number(movieId))
-    view.renderMovies(this.movies)
+    model.deleteMovie(movieId)
+    view.displayMessage('Фильм успешно удалён!')
   }
 }
 
